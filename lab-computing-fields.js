@@ -21,9 +21,6 @@ db.movies.aggregate([
 // working query
 db.movies.aggregate([
   {
-    $match: {}
-  },
-  {
     $project: {_id:0, title: { $split: ['$title', ' '] }}
   },
   {
