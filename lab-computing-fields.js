@@ -33,3 +33,26 @@ db.movies.aggregate([
     $match: {titleSize: {$eq: 1}}
   }
 ]).itcount()
+
+// ------
+// correct answer
+db.movies.aggregate([
+  {
+    $match: {
+      title: {
+        $type: "string"
+      }
+    }
+  },
+  {
+    $project: {
+      title: { $split: ["$title", " "] },
+      _id: 0
+    }
+  },
+  {
+    $match: {
+      title: { $size: 1 }
+    }
+  }
+]).itcount()
